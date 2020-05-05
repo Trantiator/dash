@@ -217,8 +217,6 @@ jobs:
     working_directory: ~/dashr
     docker:
       - image: plotly/dashr:ci
-        environment:
-        PYVERSION: python37
 
     steps:
       - checkout
