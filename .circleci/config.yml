@@ -223,9 +223,16 @@ jobs:
     steps:
       - checkout
       - run:
+          name: ️️🏗️  pip dev requirements
+          command: |
+            sudo pip install --upgrade virtualenv --quiet
+            python -m venv venv || virtualenv venv && . venv/bin/activate
+            pip install -e ../dash --no-cache-dir -r requires-install.txt -r requires-dev.txt -r requires-testing.txt --progress-bar off
+
+      - run:
           name: ️️🚧 clone R dependencies
           command: |
-            . venv/bin/activate && pip install --no-cache-dir --upgrade -e ../dash --progress-bar off && mkdir packages
+            . venv/bin/activate
             git clone --depth 1 https://github.com/plotly/dashR.git -b dev
             git clone --depth 1 https://github.com/plotly/dash-html-components.git -b dev
             git clone --depth 1 https://github.com/plotly/dash-core-components.git -b dev
