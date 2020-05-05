@@ -227,13 +227,12 @@ jobs:
           command: |
             sudo pip install --upgrade virtualenv --quiet
             python -m venv venv || virtualenv venv && . venv/bin/activate
-            cd ../dash
+            git clone --depth 1 https://github.com/plotly/dash.git -b dev
             pip install -e . --no-cache-dir -r requires-install.txt -r requires-dev.txt -r requires-testing.txt --progress-bar off
 
       - run:
           name: ️️🚧 clone R dependencies
           command: |
-            cd ~/dashr
             . venv/bin/activate
             git clone --depth 1 https://github.com/plotly/dashR.git -b dev
             git clone --depth 1 https://github.com/plotly/dash-html-components.git -b dev
@@ -315,44 +314,44 @@ workflows:
   version: 2
   python3.7:
     jobs:
-      - lint-unit-37
-      - build-core-37
-      - build-windows-37
-      - build-misc-37
+      #- lint-unit-37
+      #- build-core-37
+      #- build-windows-37
+      #- build-misc-37
       - build-dashr
-      - test-37:
-          requires:
-            - build-core-37
-            - build-misc-37
-      - percy-finalize:
-          requires:
-            - test-37
-      - artifacts:
-          requires:
-            - percy-finalize
-          filters:
-            branches:
-              only:
-                - master
-                - dev
-            tags:
-              only: /v*/
+      #- test-37:
+      #    requires:
+      #      - build-core-37
+      #      - build-misc-37
+      #- percy-finalize:
+      #    requires:
+      #      - test-37
+      #- artifacts:
+      #    requires:
+      #      - percy-finalize
+      #    filters:
+      #      branches:
+      #        only:
+      #          - master
+      #          - dev
+      #      tags:
+      #        only: /v*/
 
-  python3.6:
-    jobs:
-      - lint-unit-36
-      - build-core-36
-      - build-misc-36
-      - test-36:
-          requires:
-            - build-core-36
-            - build-misc-36
-  python2.7:
-    jobs:
-      - lint-unit-27
-      - build-core-27
-      - build-misc-27
-      - test-27:
-          requires:
-            - build-core-27
-            - build-misc-27
+  #python3.6:
+  #  jobs:
+  #    - lint-unit-36
+  #    - build-core-36
+  #    - build-misc-36
+  #    - test-36:
+  #        requires:
+  #          - build-core-36
+  #          - build-misc-36
+  #python2.7:
+  #  jobs:
+  #    - lint-unit-27
+  #    - build-core-27
+  #    - build-misc-27
+  #    - test-27:
+  #        requires:
+  #          - build-core-27
+  #          - build-misc-27
