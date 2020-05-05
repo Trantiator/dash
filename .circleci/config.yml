@@ -217,6 +217,8 @@ jobs:
     working_directory: ~/dashr
     docker:
       - image: plotly/dashr:ci
+        environment:
+          PYVERSION: python37
 
     steps:
       - checkout
@@ -225,7 +227,6 @@ jobs:
           command: |
             pip install --upgrade virtualenv
             virtualenv venv
-            source venv/Scripts/activate
             git clone --depth 1 https://github.com/plotly/dashR.git -b dev
             git clone --depth 1 https://github.com/plotly/dash-html-components.git -b dev
             git clone --depth 1 https://github.com/plotly/dash-core-components.git -b dev
