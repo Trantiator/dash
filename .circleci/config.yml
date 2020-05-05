@@ -307,6 +307,7 @@ workflows:
       - build-core-37
       - build-windows-37
       - build-misc-37
+      - build-dashr
       - test-37:
           requires:
             - build-core-37
