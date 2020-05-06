@@ -226,6 +226,7 @@ jobs:
       - run:
           name: ️️🏭 build core for R
           command: |
+            python -m venv venv
             . venv/bin/activate
             git clone --depth 1 https://github.com/plotly/dash.git -b dev dash-main
             cd dash-main && pip install -e .[dev,testing] --progress-bar off && cd ..
